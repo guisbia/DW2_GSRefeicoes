@@ -1,13 +1,13 @@
 <%-- 
-    Document   : cadastroPratoPrincipal
-    Created on : 03/07/2018, 21:48:14
+    Document   : cadastroTamanhoMarmita
+    Created on : 12/09/2018, 15:21:48
     Author     : bianc
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
-    <head>
+        <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 
 
@@ -32,7 +32,7 @@
         <link href="../vendor/arrumaMenuTabela.css" rel="stylesheet" type="text/css">
 
 
-        <title>Cadastro - PratoPrincipal </title>
+        <title>Cadastro - Marmita </title>
     </head>
     <body>
         <div id="cabecalho">
@@ -92,25 +92,20 @@
 
         <div class="panel panel-default" id="help">
             <div class="panel-heading">
-                Cadastros Prato Principal
+                Cadastros Tamanho Marmita
             </div>
             <div class="panel-body">
                 <div class="row">
                     <div class="col-lg-6">
-                        <form role="form" method="post" action="${pageContext.request.contextPath}/pratoPrincipal">
+                        <form role="form" method="post" action="${pageContext.request.contextPath}/tamanhoMarmita">
                             <div class="form-group">
                                 <label>ID </label>
-                                <input class="form-control" type="text" name="idPratoPrincipal">
-                                <p class="help-block">Digite o id do novo prato</p>
+                                <input class="form-control" type="text" name="id">
+                                <p class="help-block">Digite o id do novo tamanho</p>
                             </div>
                             <div class="form-group">
-                                <label>Nome </label>
-                                <input class="form-control" type="text" name="pratoPrincipal">
-                            </div>
-                            <div class="form-group">
-                                <label>Status </label>
-                                <input class="form-control" type="text" name="status">
-                                <p class="help-block">Digite 0 para inativo, 1 para ativo</p>
+                                <label>Tamanho </label>
+                                <input class="form-control" type="text" name="tamanho">
                             </div>
                             <input type="submit"  name="ok">
                         </form>

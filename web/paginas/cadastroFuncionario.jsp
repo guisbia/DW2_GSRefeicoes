@@ -1,15 +1,26 @@
 <%-- 
-    Document   : cadastroPratoPrincipal
-    Created on : 03/07/2018, 21:48:14
+    Document   : cadastroFuncionario
+    Created on : 12/09/2018, 15:34:05
     Author     : bianc
 --%>
 
+<%@page import="java.util.Locale"%>
+<%@page import="java.text.NumberFormat"%>
+<%@page import="java.text.SimpleDateFormat"%>
+<%@page import="java.util.List"%>
+<%@page import="Entidades.StatusFuncionario"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+
+<%
+    SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+
+    DAOs.DAOStatusFuncionario dao = new DAOs.DAOStatusFuncionario();
+    List<StatusFuncionario> status = dao.listInOrderId();
+%>
 <!DOCTYPE html>
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-
 
         <!-- Bootstrap Core CSS -->
         <link href="../vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
@@ -30,9 +41,7 @@
 
 
         <link href="../vendor/arrumaMenuTabela.css" rel="stylesheet" type="text/css">
-
-
-        <title>Cadastro - PratoPrincipal </title>
+        <title> Cadastro - Preço Produto</title>
     </head>
     <body>
         <div id="cabecalho">
@@ -92,25 +101,50 @@
 
         <div class="panel panel-default" id="help">
             <div class="panel-heading">
-                Cadastros Prato Principal
+                Cadastros Funcionário
             </div>
             <div class="panel-body">
                 <div class="row">
                     <div class="col-lg-6">
-                        <form role="form" method="post" action="${pageContext.request.contextPath}/pratoPrincipal">
+                        <form role="form" method="post" action="${pageContext.request.contextPath}/funcionario">
                             <div class="form-group">
                                 <label>ID </label>
-                                <input class="form-control" type="text" name="idPratoPrincipal">
-                                <p class="help-block">Digite o id do novo prato</p>
+                                <input class="form-control" type="text" name="id">
                             </div>
                             <div class="form-group">
                                 <label>Nome </label>
-                                <input class="form-control" type="text" name="pratoPrincipal">
+                                <input class="form-control" type="text" name="nome">
                             </div>
                             <div class="form-group">
-                                <label>Status </label>
-                                <input class="form-control" type="text" name="status">
-                                <p class="help-block">Digite 0 para inativo, 1 para ativo</p>
+                                <label>Salario </label>
+                                <input class="form-control" type="text" name="salario">
+                            </div>
+                            <div class="form-group">
+                                <label>Telefone </label>
+                                <input class="form-control" type="text" name="telefone">
+                            </div>
+                            <div class="form-group">
+                                <label>Data Inicio </label>
+                                <input class="form-control" type="text" name="dataInicio">
+                            </div>
+                            <div class="form-group">
+                                <label>Nascimento </label>
+                                <input class="form-control" type="text" name="nascimento">
+                            </div>
+                            
+                            <div class="form-group">
+                                <label> Status </label>
+                                <select class="form-control" name="status">
+                                    <%
+                                        for (StatusFuncionario st : status) {
+                                    %>
+
+
+                                    <option value="<%= st.getIdStatus()%>"> <%=st.getNomeStatus()%> </option>
+
+                                    <%}%>
+                                </select>
+                                <!-- <input class="form-control" type="text" name="idTamanhoMarmita">-->
                             </div>
                             <input type="submit"  name="ok">
                         </form>

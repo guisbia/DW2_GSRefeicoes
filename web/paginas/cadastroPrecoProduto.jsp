@@ -1,15 +1,26 @@
 <%-- 
-    Document   : cadastroPratoPrincipal
-    Created on : 03/07/2018, 21:48:14
+    Document   : cadastroPrecoProduto
+    Created on : 10/08/2018, 09:51:47
     Author     : bianc
 --%>
 
+<%@page import="java.util.Locale"%>
+<%@page import="java.text.NumberFormat"%>
+<%@page import="java.text.SimpleDateFormat"%>
+<%@page import="java.util.List"%>
+<%@page import="Entidades.TamanhoMarmita"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+
+<%
+    SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+
+    DAOs.DAOTamanhoMarmita dao = new DAOs.DAOTamanhoMarmita();
+    List<TamanhoMarmita> tamanhoMarmita = dao.listInOrderId();
+%>
 <!DOCTYPE html>
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-
 
         <!-- Bootstrap Core CSS -->
         <link href="../vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
@@ -30,9 +41,7 @@
 
 
         <link href="../vendor/arrumaMenuTabela.css" rel="stylesheet" type="text/css">
-
-
-        <title>Cadastro - PratoPrincipal </title>
+        <title> Cadastro - Preço Produto</title>
     </head>
     <body>
         <div id="cabecalho">
@@ -92,25 +101,35 @@
 
         <div class="panel panel-default" id="help">
             <div class="panel-heading">
-                Cadastros Prato Principal
+                Cadastros Preço Produto
             </div>
             <div class="panel-body">
                 <div class="row">
                     <div class="col-lg-6">
-                        <form role="form" method="post" action="${pageContext.request.contextPath}/pratoPrincipal">
+                        <form role="form" method="post" action="${pageContext.request.contextPath}/precoProduto">
                             <div class="form-group">
-                                <label>ID </label>
-                                <input class="form-control" type="text" name="idPratoPrincipal">
-                                <p class="help-block">Digite o id do novo prato</p>
+                                <label>Data </label>
+                                <input class="form-control" type="text" name="data">
+                                <p class="help-block">Digite a data</p>
                             </div>
                             <div class="form-group">
-                                <label>Nome </label>
-                                <input class="form-control" type="text" name="pratoPrincipal">
+                                <label>Tamanho Marmita </label>
+                                <select class="form-control" name="idTamanhoMarmita">
+                                    <%
+                                        for (TamanhoMarmita tm : tamanhoMarmita) {
+                                    %>
+
+                                    
+                                    <option value="<%=tm.getIdTamanhoMarmita()%>"> <%=tm.getNomeTamanhoMarmita()%> </option>
+
+                                    <%}%>
+                                </select>
+                                <!-- <input class="form-control" type="text" name="idTamanhoMarmita">-->
+                                <p class="help-block">Selecione tamanho da marmita</p>
                             </div>
                             <div class="form-group">
-                                <label>Status </label>
-                                <input class="form-control" type="text" name="status">
-                                <p class="help-block">Digite 0 para inativo, 1 para ativo</p>
+                                <label>Preco </label>
+                                <input class="form-control" type="text" name="preco">
                             </div>
                             <input type="submit"  name="ok">
                         </form>

@@ -1,16 +1,29 @@
 <%-- 
-    Document   : cadastroPratoPrincipal
-    Created on : 03/07/2018, 21:48:14
+    Document   : listaPedido
+    Created on : 10/08/2018, 09:34:28
     Author     : bianc
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@page import="java.util.*,
+        DAOs.DAOPedido,
+        Entidades.Pedido,
+        java.text.NumberFormat,
+        java.text.SimpleDateFormat"
+        %>
+
+<%
+    Locale ptBr = new Locale("pt", "BR");
+    NumberFormat formatoDinheiro = NumberFormat.getCurrencyInstance(ptBr);
+    SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+
+    DAOPedido dao = new DAOPedido();
+    List<Pedido> pedidos = dao.listInOrderNome();
+%>
 <!DOCTYPE html>
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-
-
         <!-- Bootstrap Core CSS -->
         <link href="../vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 
@@ -28,13 +41,14 @@
         <!-- Morris Charts CSS -->
         <link href="../vendor/morrisjs/morris.css" rel="stylesheet">
 
+        <link href="../vendor/arrumaMenuTabela.css" rel="stylesheet">
 
-        <link href="../vendor/arrumaMenuTabela.css" rel="stylesheet" type="text/css">
+        <link rel="shortcut icon" type="image/png" href="logo.png"/>
 
-
-        <title>Cadastro - PratoPrincipal </title>
+        <title>Pedido</title>
     </head>
     <body>
+
         <div id="cabecalho">
             <p><img id="imgLogo" src="logo.png" alt="logo"/></p> 
             <h1 id="textoCabecalho" class="fa-4x"> G.S. Refeições </h1>
@@ -87,41 +101,43 @@
             <!-- /.sidebar-collapse -->
         </div>
 
-
-
-
-        <div class="panel panel-default" id="help">
-            <div class="panel-heading">
-                Cadastros Prato Principal
-            </div>
-            <div class="panel-body">
-                <div class="row">
-                    <div class="col-lg-6">
-                        <form role="form" method="post" action="${pageContext.request.contextPath}/pratoPrincipal">
-                            <div class="form-group">
-                                <label>ID </label>
-                                <input class="form-control" type="text" name="idPratoPrincipal">
-                                <p class="help-block">Digite o id do novo prato</p>
-                            </div>
-                            <div class="form-group">
-                                <label>Nome </label>
-                                <input class="form-control" type="text" name="pratoPrincipal">
-                            </div>
-                            <div class="form-group">
-                                <label>Status </label>
-                                <input class="form-control" type="text" name="status">
-                                <p class="help-block">Digite 0 para inativo, 1 para ativo</p>
-                            </div>
-                            <input type="submit"  name="ok">
-                        </form>
+        <div class="row" id="help">
+            <div class="col-lg-12">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        Pedido
                     </div>
-                    <!-- /.col-lg-6 (nested) -->
+                    <!-- /.panel-heading -->
+                    <div class="panel-body">
+                        <table width="100%" class="table table-striped table-bordered table-hover" id="dataTables-example">
+                            <thead>
+                                <tr>
+                                    <th>Id</th>
+                                    <th>Funcionário</th>
+                                    <th>Cliente</th>
+                                    <th>Data</th>
+                                </tr>
+                            </thead>
+                            <tbody>  <!--Scriplet-->
+                                <%
+                                    for (Pedido p : pedidos) {
+                                %>
+                                <tr>
+                                    <td><%=p.getIdPedido()%></td>
+                                    <td><%=p.getFuncionarioIdFuncionario().getNomeFuncionario()%></td>
+                                    <td><%=p.getClienteIdCliente().getNomeCliente()%></td>
+                                    <td><%=sdf.format(p.getDataPedido())%></td>
+                                </tr>
+                                <%}%>
+                            </tbody>
+                        </table>
+                    </div>
+                    <!-- /.panel-body -->
                 </div>
-                <!-- /.row (nested) -->
+                <!-- /.panel -->
             </div>
-            <!-- /.panel-body -->
+            <!-- /.col-lg-12 -->
         </div>
-        <!-- /.panel -->
 
 
         <!-- jQuery -->
@@ -136,5 +152,18 @@
         <!-- Custom Theme JavaScript -->
         <script src="../dist/js/sb-admin-2.js"></script> 
 
+        <!-- DataTables JavaScript -->
+        <script src="../vendor/datatables/js/jquery.dataTables.min.js"></script>
+        <script src="../vendor/datatables-plugins/dataTables.bootstrap.min.js"></script>
+        <script src="../vendor/datatables-responsive/dataTables.responsive.js"></script>
+
+        <!-- Page-Level Demo Scripts - Tables - Use for reference -->
+        <script>
+            $(document).ready(function () {
+                $('#dataTables-example').DataTable({
+                    responsive: true
+                });
+            });
+        </script>
     </body>
 </html>

@@ -1,6 +1,6 @@
 <%-- 
-    Document   : cadastroPratoPrincipal
-    Created on : 03/07/2018, 21:48:14
+    Document   : cadastroCliente
+    Created on : 12/09/2018, 15:05:49
     Author     : bianc
 --%>
 
@@ -32,7 +32,7 @@
         <link href="../vendor/arrumaMenuTabela.css" rel="stylesheet" type="text/css">
 
 
-        <title>Cadastro - PratoPrincipal </title>
+        <title>Cadastro - Cliente </title>
     </head>
     <body>
         <div id="cabecalho">
@@ -92,25 +92,28 @@
 
         <div class="panel panel-default" id="help">
             <div class="panel-heading">
-                Cadastros Prato Principal
+                Cadastros Cliente
             </div>
             <div class="panel-body">
                 <div class="row">
                     <div class="col-lg-6">
-                        <form role="form" method="post" action="${pageContext.request.contextPath}/pratoPrincipal">
+                        <form role="form" method="post" action="${pageContext.request.contextPath}/cliente">
                             <div class="form-group">
                                 <label>ID </label>
-                                <input class="form-control" type="text" name="idPratoPrincipal">
-                                <p class="help-block">Digite o id do novo prato</p>
+                                <input class="form-control" type="text" name="id">
+                                <p class="help-block">Digite o id do novo cliente</p>
                             </div>
                             <div class="form-group">
                                 <label>Nome </label>
-                                <input class="form-control" type="text" name="pratoPrincipal">
+                                <input class="form-control" type="text" name="nome">
                             </div>
                             <div class="form-group">
-                                <label>Status </label>
-                                <input class="form-control" type="text" name="status">
-                                <p class="help-block">Digite 0 para inativo, 1 para ativo</p>
+                                <label>Telefone </label>
+                                <input class="form-control" type="text" name="telefone">
+                            </div>
+                            <div class="form-group">
+                                <label>Endereço </label>
+                                <input class="form-control" type="text" name="endereco">
                             </div>
                             <input type="submit"  name="ok">
                         </form>

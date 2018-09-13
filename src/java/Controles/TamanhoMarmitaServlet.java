@@ -40,30 +40,56 @@ public class TamanhoMarmitaServlet extends HttpServlet {
             DAOTamanhoMarmita daoTamanhoMarmita = new DAOTamanhoMarmita();
             TamanhoMarmita tamanhoMarmita = new TamanhoMarmita();
             String tabela = "";
-            List<TamanhoMarmita> lista = daoTamanhoMarmita.listInOrderId();
-            for (TamanhoMarmita p : lista) {
-                tabela += "<tr class=\"gradeA\">"
-                        + "<td>" + p.getIdTamanhoMarmita() + "</td>"
-                        + "<td>" + p.getNomeTamanhoMarmita() + "</td>"
-                        + "</tr>";
+            String id = request.getParameter("id");
+            String tamanho = request.getParameter("tamanho");
+
+            if (request.getParameter("id") == "" || request.getParameter("id") == null) {
+                List<TamanhoMarmita> lista = daoTamanhoMarmita.listInOrderId();
+                for (TamanhoMarmita p : lista) {
+                    tabela += "<tr class=\"gradeA\">"
+                            + "<td>" + p.getIdTamanhoMarmita() + "</td>"
+                            + "<td>" + p.getNomeTamanhoMarmita() + "</td>"
+                            + "</tr>";
+                }
+            } else {
+                inserir(id, tamanho);
+
+                List<TamanhoMarmita> lista = daoTamanhoMarmita.listInOrderId();
+                for (TamanhoMarmita p : lista) {
+                    tabela += "<tr class=\"gradeA\">"
+                            + "<td>" + p.getIdTamanhoMarmita() + "</td>"
+                            + "<td>" + p.getNomeTamanhoMarmita() + "</td>"
+                            + "</tr>";
+                }
             }
 
             request.getSession().setAttribute("resultado", tabela);
             response.sendRedirect(request.getContextPath() + "/paginas/listaTamanhoMarmita.jsp");
-
+            id = "";
+            tamanho = "";
+            
         }
+    }
+    
+     public void inserir (String id, String tamanho){
+        DAOTamanhoMarmita daoTamanhoMarmita = new DAOTamanhoMarmita();
+        TamanhoMarmita tamanhoMarmita = new TamanhoMarmita();
+        
+        tamanhoMarmita.setIdTamanhoMarmita(Integer.valueOf(id));
+        tamanhoMarmita.setNomeTamanhoMarmita(tamanho);
+        daoTamanhoMarmita.inserir(tamanhoMarmita);
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         processRequest(request, response);
     }
-    
+
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         processRequest(request, response);
     }
-    
+
     public String getServletInfo() {
         return "Short description";
     }
