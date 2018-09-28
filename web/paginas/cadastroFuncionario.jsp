@@ -60,11 +60,11 @@
                         <a href="#"><i class="fa fa-bar-chart-o fa-fw"></i> Cadastros <span class="fa arrow"></span></a>
                         <ul class="nav nav-second-level">
                             <li><a href="Pagina02.jsp">Marmita</a></li>
-                            <li><a href="Pagina02.jsp">Tamanho Marmita</a></li>
-                            <li><a href="Pagina02.jsp">Preço Marmita</a></li>
+                            <li><a href="cadastroTamanhoMarmita.jsp">Tamanho Marmita</a></li>
+                            <li><a href="cadastroPrecoProduto.jsp">Preço Marmita</a></li>
                             <li><a href="cadastroPratoPrincipal.jsp">Prato Principal</a></li>
-                            <li><a href="Pagina02.jsp">Cliente</a></li>
-                            <li><a href="Pagina02.jsp"> Funcionário </a></li>
+                            <li><a href="cadastroCliente.jsp">Cliente</a></li>
+                            <li><a href="cadastroFuncionario.jsp"> Funcionário </a></li>
                             <li><a href="Pagina02.jsp"> Status Funcionário </a></li>
                         </ul>
                         <!-- /.nav-second-level -->
@@ -79,14 +79,14 @@
                             <li><a href="../pratoPrincipal">Prato Principal</a></li>
                             <li><a href="../cliente">Cliente</a></li>
                             <li><a href="../funcionario"> Funcionário </a></li>
-                            <li><a href="../status"> Status Funcionário </a></li>
+                            <li><a href="listaStatus.jsp"> Status Funcionário </a></li>
 
                         </ul>
                         <!-- /.nav-second-level -->
                     </li>
 
                     <li>
-                        <a href="Pagina02.jsp"><i class="fa fa-android fa-fw"></i> Pedidos</a>
+                        <a href="listaPedido.jsp"><i class="fa fa-android fa-fw"></i> Pedidos</a>
                     </li>
                     <li>
                         <a href="Pagina02.jsp"><i class="fa fa-edit fa-fw"></i> Relatórios</a>
