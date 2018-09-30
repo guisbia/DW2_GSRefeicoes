@@ -25,7 +25,7 @@
 
         <!-- Morris Charts CSS -->
         <link href="../vendor/morrisjs/morris.css" rel="stylesheet">
-        
+
         <link href="../vendor/arrumaMenuTabela.css" rel="stylesheet">
 
         <title>Preço Produto</title>
@@ -71,9 +71,12 @@
                         </ul>
                         <!-- /.nav-second-level -->
                     </li>
-
                     <li>
-                        <a href="listaPedido.jsp"><i class="fa fa-android fa-fw"></i> Pedidos</a>
+                        <a href="#"><i class="fa fa-calendar-check-o fa-fw"></i> Pedidos <span class="fa arrow"></span></a>
+                        <ul class="nav nav-second-level">
+                            <li><a href="listaPedido.jsp">Lista de pedidos</a></li>
+                            <li><a href="Pagina02.jsp">Fazer pedidos</a></li>
+                        </ul>
                     </li>
                     <li>
                         <a href="Pagina02.jsp"><i class="fa fa-edit fa-fw"></i> Relatórios</a>
