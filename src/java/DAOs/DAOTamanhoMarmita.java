@@ -11,7 +11,7 @@ private List<TamanhoMarmita> lista = new ArrayList<>();    public DAOTamanhoMarm
     }
 
     public int autoIdTamanhoMarmita() {
-        Integer a = (Integer) em.createQuery("SELECT MAX(e.idTamanhoMarmita) FROM TamanhoMarmita) e ").getSingleResult();
+        Integer a = (Integer) em.createQuery("SELECT MAX(e.idTamanhoMarmita) FROM TamanhoMarmita e ").getSingleResult();
         if (a != null) {
             return a + 1;
         } else {

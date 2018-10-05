@@ -14,6 +14,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import DAOs.DAOPrecoProduto;
+import DAOs.DAOTamanhoMarmita;
 import Entidades.Marmita;
 import Entidades.PrecoProduto;
 import Entidades.PrecoProdutoPK;
@@ -49,6 +50,7 @@ public class PrecoProdutoServlet extends HttpServlet {
         try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
             DAOPrecoProduto daoPrecoProduto = new DAOPrecoProduto();
+            DAOTamanhoMarmita daoTamanhoMarmita = new DAOTamanhoMarmita();
             PrecoProduto precoProduto = new PrecoProduto();
             String tabela = "";
             String data = request.getParameter("data");
@@ -61,7 +63,7 @@ public class PrecoProdutoServlet extends HttpServlet {
                 for (PrecoProduto p : lista) {
                     tabela += "<tr class=\"gradeA\">"
                             + "<td>" + sdf.format(p.getPrecoProdutoPK().getDataPrecoProduto()) + "</td>"
-                            + "<td>" + p.getTamanhoMarmita().getNomeTamanhoMarmita() + "</td>"
+                            + "<td>" + daoTamanhoMarmita.obter(p.getPrecoProdutoPK().getTamanhoMarmitaIdTamanhoMarmita()).getNomeTamanhoMarmita()+ "</td>"
                             + "<td>" + p.getPreco() + "</td>"
                             + "</tr>";
                 }
@@ -74,8 +76,7 @@ public class PrecoProdutoServlet extends HttpServlet {
                 for (PrecoProduto p : lista) {
                     tabela += "<tr class=\"gradeA\">"
                             + "<td>" + sdf.format(p.getPrecoProdutoPK().getDataPrecoProduto()) + "</td>"
-                            //   + "<td>" + p.getTamanhoMarmita().getNomeTamanhoMarmita()+ "</td>"
-                            + "<td>" + marmita.getTamanhoMarmitaIdTamanhoMarmita().getNomeTamanhoMarmita() + "</td>"
+                            + "<td>" + daoTamanhoMarmita.obter(p.getPrecoProdutoPK().getTamanhoMarmitaIdTamanhoMarmita()).getNomeTamanhoMarmita()+ "</td>"
                             + "<td>" + p.getPreco() + "</td>"
                             + "</tr>";
                 }
@@ -89,18 +90,21 @@ public class PrecoProdutoServlet extends HttpServlet {
         }
     }
 
-    public void inserir(String data, String idMarmita, String preco) {
+    public void inserir(String data, String id, String preco) {
         DAOPrecoProduto daoPrecoProduto = new DAOPrecoProduto();
         PrecoProduto precoProduto = new PrecoProduto();
         PrecoProdutoPK precoProdutoPK = new PrecoProdutoPK();
         Date dataConvert = null;
+        int idMarmita = Integer.valueOf(id);
         try {
             // precoProdutoPK.setDataPrecoProduto(sdf.parse(data));
             dataConvert = sdf.parse(data);
+            precoProdutoPK.setDataPrecoProduto(dataConvert);
+            precoProduto.setPrecoProdutoPK(new PrecoProdutoPK(dataConvert, idMarmita));
         } catch (ParseException ex) {
             Logger.getLogger(PrecoProdutoServlet.class.getName()).log(Level.SEVERE, null, ex);
         }
-        precoProdutoPK = new PrecoProdutoPK(dataConvert, Integer.valueOf(idMarmita));
+        precoProdutoPK = new PrecoProdutoPK(dataConvert, idMarmita);
         //precoProdutoPK.setTamanhoMarmitaIdTamanhoMarmita(Integer.valueOf(idMarmita;
         precoProduto.setPrecoProdutoPK(precoProdutoPK);
         precoProduto.setPreco(Double.valueOf(preco));

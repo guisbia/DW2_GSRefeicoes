@@ -104,7 +104,8 @@
                         <form role="form" method="post" action="${pageContext.request.contextPath}/cliente">
                             <div class="form-group">
                                 <label>ID </label>
-                                <input class="form-control" type="text" name="id">
+                                <% DAOs.DAOCliente dao = new DAOs.DAOCliente();%>
+                                <input class="form-control" type="text" name="id" value="<%=dao.autoIdCliente()%>" readonly="">
                                 <p class="help-block">Digite o id do novo cliente</p>
                             </div>
                             <div class="form-group">

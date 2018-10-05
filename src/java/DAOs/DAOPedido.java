@@ -11,7 +11,7 @@ private List<Pedido> lista = new ArrayList<>();    public DAOPedido(){
     }
 
     public int autoIdPedido() {
-        Integer a = (Integer) em.createQuery("SELECT MAX(e.idPedido) FROM Pedido) e ").getSingleResult();
+        Integer a = (Integer) em.createQuery("SELECT MAX(e.idPedido) FROM Pedido e ").getSingleResult();
         if (a != null) {
             return a + 1;
         } else {

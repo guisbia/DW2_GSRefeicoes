@@ -11,7 +11,7 @@ private List<Cliente> lista = new ArrayList<>();    public DAOCliente(){
     }
 
     public int autoIdCliente() {
-        Integer a = (Integer) em.createQuery("SELECT MAX(e.idCliente) FROM Cliente) e ").getSingleResult();
+        Integer a = (Integer) em.createQuery("SELECT MAX(e.idCliente) FROM Cliente e ").getSingleResult();
         if (a != null) {
             return a + 1;
         } else {

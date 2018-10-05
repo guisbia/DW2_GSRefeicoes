@@ -104,7 +104,8 @@
                         <form role="form" method="post" action="${pageContext.request.contextPath}/tamanhoMarmita">
                             <div class="form-group">
                                 <label>ID </label>
-                                <input class="form-control" type="text" name="id">
+                                <%DAOs.DAOTamanhoMarmita dao = new DAOs.DAOTamanhoMarmita();%>
+                                <input class="form-control" type="text" name="id" value="<%=dao.autoIdTamanhoMarmita()%>" readonly="">
                                 <p class="help-block">Digite o id do novo tamanho</p>
                             </div>
                             <div class="form-group">

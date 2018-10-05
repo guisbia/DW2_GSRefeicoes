@@ -113,7 +113,8 @@
                         <form role="form" method="post" action="${pageContext.request.contextPath}/funcionario">
                             <div class="form-group">
                                 <label>ID </label>
-                                <input class="form-control" type="text" name="id">
+                                <%DAOs.DAOFuncionario daoFunc = new DAOs.DAOFuncionario();%>
+                                <input class="form-control" type="text" name="id" value="<%=daoFunc.autoIdFuncionario()%>" readonly="">
                             </div>
                             <div class="form-group">
                                 <label>Nome </label>

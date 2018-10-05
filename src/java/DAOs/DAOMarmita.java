@@ -11,7 +11,7 @@ private List<Marmita> lista = new ArrayList<>();    public DAOMarmita(){
     }
 
     public int autoIdMarmita() {
-        Integer a = (Integer) em.createQuery("SELECT MAX(e.idMarmita) FROM Marmita) e ").getSingleResult();
+        Integer a = (Integer) em.createQuery("SELECT MAX(e.idMarmita) FROM Marmita e ").getSingleResult();
         if (a != null) {
             return a + 1;
         } else {

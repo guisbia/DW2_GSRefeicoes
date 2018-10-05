@@ -104,7 +104,8 @@
                         <form role="form" method="post" action="${pageContext.request.contextPath}/pratoPrincipal">
                             <div class="form-group">
                                 <label>ID </label>
-                                <input class="form-control" type="text" name="idPratoPrincipal">
+                                <% DAOs.DAOPratoPrincipal daoPratoPrinc = new DAOs.DAOPratoPrincipal();%>
+                                <input class="form-control" type="text" name="idPratoPrincipal" value="<%=daoPratoPrinc.autoIdPratoPrincipal()%>" readonly="">
                                 <p class="help-block">Digite o id do novo prato</p>
                             </div>
                             <div class="form-group">
