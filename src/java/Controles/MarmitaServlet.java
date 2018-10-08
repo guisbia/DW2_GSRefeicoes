@@ -13,6 +13,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import DAOs.DAOMarmita;
+import DAOs.DAOPratoPrincipal;
+import DAOs.DAOTamanhoMarmita;
 import Entidades.Marmita;
 import java.util.List;
 
@@ -40,22 +42,61 @@ public class MarmitaServlet extends HttpServlet {
             DAOMarmita daoMarmita = new DAOMarmita();
             Marmita marmita = new Marmita();
             String tabela = "";
-            List<Marmita> lista = daoMarmita.listInOrderId();
-            for (Marmita p : lista) {
-                tabela += "<tr class=\"gradeA\">"
-                        + "<td>" + p.getIdMarmita() + "</td>"
-                        + "<td>" + p.getPratoPrincipalIdPratoPrincipal().getNomePratoPrincipal() + "</td>"
-                        + "<td>" + p.getTamanhoMarmitaIdTamanhoMarmita().getNomeTamanhoMarmita() + "</td>"
-                        + "<td>" + p.getStatus() + "</td>"
-                        + "</tr>";
+            String id = request.getParameter("id");
+            String pratoPrinc = request.getParameter("prato");
+            String tamanhoMarmita = request.getParameter("tamanho");
+            String status = request.getParameter("status");
+            // List<Marmita> lista = daoMarmita.listInOrderId();
+            if (request.getParameter("id") == "" || request.getParameter("id") == null) {
+                List<Marmita> lista = daoMarmita.listInOrderId();
+                for (Marmita p : lista) {
+                    tabela += "<tr class=\"gradeA\">"
+                            + "<td>" + p.getIdMarmita() + "</td>"
+                            + "<td>" + p.getPratoPrincipalIdPratoPrincipal().getNomePratoPrincipal() + "</td>"
+                            + "<td>" + p.getTamanhoMarmitaIdTamanhoMarmita().getNomeTamanhoMarmita() + "</td>"
+                            + "<td>" + p.getStatus() + "</td>"
+                            + "</tr>";
+                }
+            } else {
+                inserir(id, pratoPrinc, tamanhoMarmita, status);
+
+                List<Marmita> lista = daoMarmita.listInOrderId();
+                for (Marmita p : lista) {
+                    tabela += "<tr class=\"gradeA\">"
+                            + "<td>" + p.getIdMarmita() + "</td>"
+                            + "<td>" + p.getPratoPrincipalIdPratoPrincipal().getNomePratoPrincipal() + "</td>"
+                            + "<td>" + p.getTamanhoMarmitaIdTamanhoMarmita().getNomeTamanhoMarmita() + "</td>"
+                            + "<td>" + p.getStatus() + "</td>"
+                            + "</tr>";
+                }
+
             }
 
             request.getSession().setAttribute("resultado", tabela);
             response.sendRedirect(request.getContextPath() + "/paginas/listaMarmita.jsp");
+            
+            id = "";
+            tamanhoMarmita = "";
+            pratoPrinc = "";
+            status = "";
+            
 
         }
     }
+    
+    public void inserir(String id, String prato, String tamanho, String status) {
+        DAOMarmita daoMarmita = new DAOMarmita();
+        DAOPratoPrincipal daoPratoPrincipal = new DAOPratoPrincipal();
+        DAOTamanhoMarmita daoTamanhoMarmita = new DAOTamanhoMarmita();
+        Marmita marmita = new Marmita();
+        marmita.setIdMarmita(Integer.valueOf(id));
+        marmita.setPratoPrincipalIdPratoPrincipal(daoPratoPrincipal.obter(Integer.valueOf(prato)));
+        marmita.setTamanhoMarmitaIdTamanhoMarmita(daoTamanhoMarmita.obter(Integer.valueOf(tamanho)));
+        marmita.setStatus(Short.valueOf(status));
+        daoMarmita.inserir(marmita);
+    }
 
+   
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**

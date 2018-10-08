@@ -1,10 +1,28 @@
 <%-- 
-    Document   : cadastroPratoPrincipal
-    Created on : 03/07/2018, 21:48:14
+    Document   : cadastroMarmita
+    Created on : 05/10/2018, 09:14:17
     Author     : bianc
 --%>
 
+<%@page import="Entidades.TamanhoMarmita"%>
+<%@page import="DAOs.DAOMarmita"%>
+<%@page import="java.text.SimpleDateFormat"%>
+<%@page import="Entidades.Marmita"%>
+<%@page import="java.util.List"%>
+<%@page import="Entidades.PratoPrincipal"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+
+
+
+<%
+    SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+
+    DAOs.DAOPratoPrincipal daoPratoPrincipal = new DAOs.DAOPratoPrincipal();
+    List<PratoPrincipal> pratoPrinc = daoPratoPrincipal.listInOrderId();
+    
+    DAOs.DAOTamanhoMarmita daoTamanhoMarmita = new DAOs.DAOTamanhoMarmita();
+    List<TamanhoMarmita> tamanhoMarmita = daoTamanhoMarmita.listInOrderId();
+%>
 <!DOCTYPE html>
 <html>
     <head>
@@ -32,7 +50,7 @@
         <link href="../vendor/arrumaMenuTabela.css" rel="stylesheet" type="text/css">
 
 
-        <title>Cadastro - PratoPrincipal </title>
+        <title>Cadastro - Marmita </title>
     </head>
     <body>
         <div id="cabecalho">
@@ -96,22 +114,41 @@
 
         <div class="panel panel-default" id="help">
             <div class="panel-heading">
-                Cadastros Prato Principal
+                Cadastros Marmita
             </div>
             <div class="panel-body">
                 <div class="row">
                     <div class="col-lg-6">
-                        <form role="form" method="post" action="${pageContext.request.contextPath}/pratoPrincipal">
+                        <form role="form" method="post" action="${pageContext.request.contextPath}/marmita">
                             <div class="form-group">
                                 <label>ID </label>
-                                <% DAOs.DAOPratoPrincipal daoPratoPrinc = new DAOs.DAOPratoPrincipal();%>
-                                <input class="form-control" type="text" name="idPratoPrincipal" value="<%=daoPratoPrinc.autoIdPratoPrincipal()%>" readonly="">
+                                <% DAOMarmita daoM = new DAOMarmita();%>
+                                <input class="form-control" type="text" name="id" value="<%=daoM.autoIdMarmita()%>" readonly="">
                                 <p class="help-block">Digite o id do novo prato</p>
                             </div>
+                                
                             <div class="form-group">
-                                <label>Nome </label>
-                                <input class="form-control" type="text" name="pratoPrincipal">
+                                <label>Prato Principal </label>
+                                <select class="form-control" name="prato">
+                                    <%
+                                        for (PratoPrincipal princ : pratoPrinc) {
+                                    %>
+                                    <option value="<%= princ.getIdPratoPrincipal() %>"> <%=princ.getNomePratoPrincipal() %> </option>
+                                    <%}%>
+                                </select>
                             </div>
+                                
+                            <div class="form-group">
+                                <label>Tamanho Marmita </label>
+                                <select class="form-control" name="tamanho">
+                                    <%
+                                        for (TamanhoMarmita tam : tamanhoMarmita) {
+                                    %>
+                                    <option value="<%= tam.getIdTamanhoMarmita() %>"> <%=tam.getNomeTamanhoMarmita() %> </option>
+                                    <%}%>
+                                </select> 
+                            </div>
+                                
                             <div class="form-group">
                                 <label>Status </label>
                                 <input class="form-control" type="text" name="status">
@@ -143,3 +180,4 @@
 
     </body>
 </html>
+

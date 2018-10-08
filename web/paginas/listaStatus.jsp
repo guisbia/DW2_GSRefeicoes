@@ -47,7 +47,7 @@
                     <li>
                         <a href="#"><i class="fa fa-bar-chart-o fa-fw"></i> Cadastros <span class="fa arrow"></span></a>
                         <ul class="nav nav-second-level">
-                            <li><a href="Pagina02.jsp">Marmita</a></li>
+                            <li><a href="cadastroMarmita.jsp">Marmita</a></li>
                             <li><a href="cadastroTamanhoMarmita.jsp">Tamanho Marmita</a></li>
                             <li><a href="cadastroPrecoProduto.jsp">Preço Marmita</a></li>
                             <li><a href="cadastroPratoPrincipal.jsp">Prato Principal</a></li>
