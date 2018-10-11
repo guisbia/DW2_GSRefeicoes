@@ -27,6 +27,9 @@
         <link href="../vendor/morrisjs/morris.css" rel="stylesheet">
 
         <link href="../vendor/arrumaMenuTabela.css" rel="stylesheet">
+        
+        <link rel="shortcut icon" type="image/png" href="logo.png"/>
+        
         <title>Prato Principal</title>
     </head>
     <body>
@@ -51,7 +54,7 @@
                             <li><a href="cadastroPratoPrincipal.jsp">Prato Principal</a></li>
                             <li><a href="cadastroCliente.jsp">Cliente</a></li>
                             <li><a href="cadastroFuncionario.jsp"> Funcionário </a></li>
-                            <li><a href="Pagina02.jsp"> Status Funcionário </a></li>
+                            <li><a href="cadastroStatus.jsp"> Status Funcionário </a></li>
                         </ul>
                         <!-- /.nav-second-level -->
                     </li>
@@ -74,7 +77,7 @@
                         <a href="#"><i class="fa fa-calendar-check-o fa-fw"></i> Pedidos <span class="fa arrow"></span></a>
                         <ul class="nav nav-second-level">
                             <li><a href="listaPedido.jsp">Lista de pedidos</a></li>
-                            <li><a href="Pagina02.jsp">Fazer pedidos</a></li>
+                            <li><a href="cadastroPedido.jsp">Fazer pedidos</a></li>
                         </ul>
                     </li>
                     <li>

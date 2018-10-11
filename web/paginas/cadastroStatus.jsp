@@ -1,15 +1,16 @@
 <%-- 
-    Document   : listaStatus
-    Created on : 05/07/2018, 21:20:25
+    Document   : cadastroStatus
+    Created on : 10/10/2018, 13:29:12
     Author     : bianc
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<%@ taglib uri = "http://java.sun.com/jsp/jstl/core" prefix = "c" %>
 <!DOCTYPE html>
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+
         <!-- Bootstrap Core CSS -->
         <link href="../vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 
@@ -26,12 +27,13 @@
 
         <!-- Morris Charts CSS -->
         <link href="../vendor/morrisjs/morris.css" rel="stylesheet">
-        
-        <link href="../vendor/arrumaMenuTabela.css" rel="stylesheet">
-        
-        <link rel="shortcut icon" type="image/png" href="logo.png"/>
 
-        <title>Status Funcionário</title>
+
+        <link href="../vendor/arrumaMenuTabela.css" rel="stylesheet" type="text/css">
+
+        <link rel="shortcut icon" type="image/png" href="logo.png"/>
+        
+        <title>Cadastro - Status </title>
     </head>
     <body>
         <div id="cabecalho">
@@ -90,38 +92,36 @@
             <!-- /.sidebar-collapse -->
         </div>
 
-        <div class="row" id="help">
-            <div class="col-lg-12">
-                <div class="panel panel-default">
-                    <div class="panel-heading">
-                        Status Funcionario
-                    </div>
-                    <!-- /.panel-heading -->
-                    <div class="panel-body">
-                        <table width="100%" class="table table-striped table-bordered table-hover" id="dataTables-example">
-                            <thead>
-                                <tr>
-                                    <th>ID</th>
-                                    <th>Nome</th>
-                                </tr>
-                            </thead>
-                            <tbody> <!--JSTL-->
-                                <jsp:useBean id="dao" class="DAOs.DAOStatusFuncionario"/>
-                                <c:forEach var="status" items="${dao.listInOrderNome()}">
-                                    <tr>
-                                        <td>${status.getIdStatus()}</td>
-                                        <td>${status.getNomeStatus()}</td>
-                                    </tr>
-                                </c:forEach>
-                            </tbody>
-                        </table>
-                    </div>
-                    <!-- /.panel-body -->
-                </div>
-                <!-- /.panel -->
+
+
+
+        <div class="panel panel-default" id="help">
+            <div class="panel-heading">
+                Cadastros Status Funcionário
             </div>
-            <!-- /.col-lg-12 -->
+            <div class="panel-body">
+                <div class="row">
+                    <div class="col-lg-6">
+                        <form role="form" method="post" action="${pageContext.request.contextPath}/status">
+                            <div class="form-group">
+                                <label>ID </label>
+                                <% DAOs.DAOStatusFuncionario dao = new DAOs.DAOStatusFuncionario();%>
+                                <input class="form-control" type="text" name="id" value="<%=dao.autoIdStatusFuncionario()%>" readonly="">
+                            </div>
+                            <div class="form-group">
+                                <label>Status </label>
+                                <input class="form-control" type="text" name="status">
+                            </div>
+                            <input type="submit"  name="ok">
+                        </form>
+                    </div>
+                    <!-- /.col-lg-6 (nested) -->
+                </div>
+                <!-- /.row (nested) -->
+            </div>
+            <!-- /.panel-body -->
         </div>
+        <!-- /.panel -->
 
 
         <!-- jQuery -->
@@ -136,19 +136,5 @@
         <!-- Custom Theme JavaScript -->
         <script src="../dist/js/sb-admin-2.js"></script> 
 
-        <!-- DataTables JavaScript -->
-        <script src="../vendor/datatables/js/jquery.dataTables.min.js"></script>
-        <script src="../vendor/datatables-plugins/dataTables.bootstrap.min.js"></script>
-        <script src="../vendor/datatables-responsive/dataTables.responsive.js"></script>
-
-        <!-- Page-Level Demo Scripts - Tables - Use for reference -->
-        <script>
-            $(document).ready(function () {
-                $('#dataTables-example').DataTable({
-                    responsive: true
-                });
-            });
-        </script>
     </body>
 </html>
-

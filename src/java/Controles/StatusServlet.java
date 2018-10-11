@@ -32,7 +32,7 @@ public class StatusServlet extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
-   protected void processRequest(HttpServletRequest request, HttpServletResponse response)
+    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
@@ -40,30 +40,57 @@ public class StatusServlet extends HttpServlet {
             DAOStatusFuncionario daoStatusFuncionario = new DAOStatusFuncionario();
             StatusFuncionario statusFuncionario = new StatusFuncionario();
             String tabela = "";
-            List<StatusFuncionario> lista = daoStatusFuncionario.listInOrderId();
-            for (StatusFuncionario p : lista) {
-                tabela += "<tr class=\"gradeA\">"
-                        + "<td>" + p.getIdStatus() + "</td>"
-                        + "<td>" + p.getNomeStatus()+ "</td>"
-                        + "</tr>";
+            String id = request.getParameter("id");
+            String status = request.getParameter("status");
+            
+            if (request.getParameter("id") == "" || request.getParameter("id") == null) {
+                List<StatusFuncionario> lista = daoStatusFuncionario.listInOrderId();
+                for (StatusFuncionario p : lista) {
+                    tabela += "<tr class=\"gradeA\">"
+                            + "<td>" + p.getIdStatus() + "</td>"
+                            + "<td>" + p.getNomeStatus() + "</td>"
+                            + "</tr>";
+                }
+            } else {
+                inserir(id, status);
+                
+                List<StatusFuncionario> lista = daoStatusFuncionario.listInOrderId();
+                for (StatusFuncionario p : lista) {
+                    tabela += "<tr class=\"gradeA\">"
+                            + "<td>" + p.getIdStatus() + "</td>"
+                            + "<td>" + p.getNomeStatus() + "</td>"
+                            + "</tr>";
+                }
             }
-
+            
             request.getSession().setAttribute("resultado", tabela);
             response.sendRedirect(request.getContextPath() + "/paginas/listaStatus.jsp");
-
+            
+            id = "";
+            status = "";
+            
         }
-   }
-
+    }
+    
+    public void inserir(String id, String status) {
+        DAOStatusFuncionario daoStatusFuncionario = new DAOStatusFuncionario();
+        StatusFuncionario statusFuncionario = new         StatusFuncionario();
+        
+        statusFuncionario.setIdStatus(Integer.valueOf(id));
+        statusFuncionario.setNomeStatus(status);
+        daoStatusFuncionario.inserir(statusFuncionario);
+    }
+    
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         processRequest(request, response);
     }
-
+    
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         processRequest(request, response);
     }
-
+    
     public String getServletInfo() {
         return "Short description";
     }
@@ -77,5 +104,4 @@ public class StatusServlet extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
-   
 }

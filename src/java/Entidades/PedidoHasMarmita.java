@@ -35,6 +35,8 @@ public class PedidoHasMarmita implements Serializable {
     // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
     @Column(name = "valor")
     private Double valor;
+    @Column(name = "desconto")
+    private Double desconto;
     @JoinColumn(name = "marmita_id_marmita", referencedColumnName = "id_marmita", insertable = false, updatable = false)
     @ManyToOne(optional = false)
     private Marmita marmita;
@@ -80,6 +82,14 @@ public class PedidoHasMarmita implements Serializable {
 
     public void setValor(Double valor) {
         this.valor = valor;
+    }
+
+    public Double getDesconto() {
+        return desconto;
+    }
+
+    public void setDesconto(Double desconto) {
+        this.desconto = desconto;
     }
 
     public Marmita getMarmita() {
